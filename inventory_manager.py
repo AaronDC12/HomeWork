@@ -158,9 +158,30 @@ def remove_item(inventory):
     print("Item not found.")
 
 def search_inventory(inventory):
-    """Search inventory using an item name."""
-    pass
+    """Search inventory using a partial, case-insensitive name."""
+    search_term = input("Enter a search term: ").strip()
 
+    if not search_term:
+        print("Search term cannot be empty.")
+        return
+
+    found_items = []
+
+    for item in inventory:
+        if search_term.lower() in item["name"].lower():
+            found_items.append(item)
+
+    if not found_items:
+        print("No matching items found.")
+        return
+
+    print("\nSearch Results:")
+    for number, item in enumerate(found_items, start=1):
+        print(
+            f"{number}. {item['name']} | "
+            f"{item['category']} | "
+            f"Quantity: {item['quantity']}"
+        )
 
 def display_summary(inventory):
     """Display a summary of the inventory."""
@@ -171,10 +192,7 @@ def main():
     """Run the Inventory Manager program."""
     inventory = load_inventory(INVENTORY_FILE)
 
-    remove_item(inventory)
-
-    view_inventory(inventory)
-
+    search_inventory(inventory)
     view_inventory(inventory)
 if __name__ == "__main__":
     main()

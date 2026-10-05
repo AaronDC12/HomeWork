@@ -54,7 +54,17 @@ def save_inventory(inventory, filename):
 
 def view_inventory(inventory):
     """Display all inventory items."""
-    pass
+    if not inventory:
+        print("No inventory items found.")
+        return
+
+    print("\nInventory:")
+    for number, item in enumerate(inventory, start=1):
+        print(
+            f"{number}. {item['name']} | "
+            f"{item['category']} | "
+            f"Quantity: {item['quantity']}"
+        )
 
 
 def add_item(inventory):
@@ -86,11 +96,10 @@ def main():
     """Run the Inventory Manager program."""
     inventory = load_inventory(INVENTORY_FILE)
 
-    print(inventory)
-
     save_inventory(inventory, INVENTORY_FILE)
 
-    display_menu()
+    view_inventory(inventory)
 
+    display_menu()
 if __name__ == "__main__":
     main()

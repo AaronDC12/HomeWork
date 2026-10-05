@@ -22,13 +22,35 @@ def display_menu():
 
 def load_inventory(filename):
     """Load inventory records from a text file."""
-    return []
+    inventory = []
 
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+                line = line.strip()
 
+                if line:
+                    name, category, quantity = line.split("|")
+
+                    item = {
+                        "name": name,
+                        "category": category,
+                        "quantity": int(quantity)
+                    }
+
+                    inventory.append(item)
+
+    except FileNotFoundError:
+        return []
+
+    return inventory
 def save_inventory(inventory, filename):
     """Save inventory records to a text file."""
-    pass
-
+    with open(filename, "w") as file:
+        for item in inventory:
+            file.write(
+                f"{item['name']}|{item['category']}|{item['quantity']}\n"
+            )
 
 def view_inventory(inventory):
     """Display all inventory items."""
@@ -62,8 +84,13 @@ def display_summary(inventory):
 
 def main():
     """Run the Inventory Manager program."""
-    display_menu()
+    inventory = load_inventory(INVENTORY_FILE)
 
+    print(inventory)
+
+    save_inventory(inventory, INVENTORY_FILE)
+
+    display_menu()
 
 if __name__ == "__main__":
     main()

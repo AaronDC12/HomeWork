@@ -3,4 +3,3 @@ Printer Paper|Office Supplies|25
 Dry-Erase Markers|Classroom Supplies|4
 HDMI Cable|Electronics|6
 Notebook|Classroom Supplies|12
-Keyboard|Electronics|10

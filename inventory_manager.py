@@ -185,14 +185,37 @@ def search_inventory(inventory):
 
 def display_summary(inventory):
     """Display a summary of the inventory."""
-    pass
+    unique_items = len(inventory)
+    total_quantity = sum(item["quantity"] for item in inventory)
 
+    low_stock_items = [
+        item for item in inventory
+        if item["quantity"] < 5
+    ]
+
+    category_counts = {}
+
+    for item in inventory:
+        category = item["category"].lower()
+
+        if category not in category_counts:
+            category_counts[category] = 0
+
+        category_counts[category] += 1
+
+    print("\nInventory Summary")
+    print(f"Unique items: {unique_items}")
+    print(f"Total quantity: {total_quantity}")
+    print(f"Low-stock items: {len(low_stock_items)}")
+
+    print("Items by category:")
+    for category, count in category_counts.items():
+        print(f"- {category}: {count}")
 
 def main():
     """Run the Inventory Manager program."""
     inventory = load_inventory(INVENTORY_FILE)
 
-    search_inventory(inventory)
-    view_inventory(inventory)
+    display_summary(inventory)
 if __name__ == "__main__":
     main()

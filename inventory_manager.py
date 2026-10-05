@@ -115,8 +115,28 @@ def add_item(inventory):
     print("Item added successfully.")
 def update_quantity(inventory):
     """Update the quantity of an existing inventory item."""
-    pass
+    name = input("Enter the item name to update: ").strip()
 
+    if not name:
+        print("Item name cannot be empty.")
+        return
+
+    for item in inventory:
+        if item["name"].lower() == name.lower():
+            quantity_input = input("Enter the new quantity: ").strip()
+
+            if not quantity_input.isdigit():
+                print("Quantity must be a nonnegative whole number.")
+                return
+
+            item["quantity"] = int(quantity_input)
+
+            save_inventory(inventory, INVENTORY_FILE)
+
+            print("Quantity updated successfully.")
+            return
+
+    print("Item not found.")
 
 def remove_item(inventory):
     """Remove an inventory item."""
@@ -137,10 +157,8 @@ def main():
     """Run the Inventory Manager program."""
     inventory = load_inventory(INVENTORY_FILE)
 
-    add_item(inventory)
+    update_quantity(inventory)
 
     view_inventory(inventory)
-
-    display_menu()
 if __name__ == "__main__":
     main()

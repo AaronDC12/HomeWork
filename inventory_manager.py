@@ -168,8 +168,8 @@ def search_inventory(inventory):
     found_items = []
 
     for item in inventory:
-        if search_term.lower() in item["name"].lower():
-            found_items.append(item)
+       if search_term.casefold() in item["name"].casefold():
+        found_items.append(item)
 
     if not found_items:
         print("No matching items found.")

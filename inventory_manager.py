@@ -216,6 +216,28 @@ def main():
     """Run the Inventory Manager program."""
     inventory = load_inventory(INVENTORY_FILE)
 
+    while True:
+        display_menu()
+
+        choice = input("Enter your choice: ").strip()
+
+        if choice == "1":
+            view_inventory(inventory)
+        elif choice == "2":
+            add_item(inventory)
+        elif choice == "3":
+            update_quantity(inventory)
+        elif choice == "4":
+            remove_item(inventory)
+        elif choice == "5":
+            search_inventory(inventory)
+        elif choice == "6":
+            display_summary(inventory)
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        else:
+            print("Please enter a number from 1 to 7.")
     display_summary(inventory)
 if __name__ == "__main__":
     main()

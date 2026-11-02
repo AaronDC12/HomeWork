@@ -1,6 +1,9 @@
+
 # Testing
 
-The Inventory Manager was tested manually through the command-line interface. The tests below cover the required features, input validation, file loading/saving, and menu behavior.
+The Inventory Manager was tested using automated pytest unit tests and manual command-line testing. The tests cover the required features, input validation, file loading and saving, searching, adding, removing, quantity updates, and inventory summaries.
+
+## Manual Testing
 
 | # | Feature | Test | Expected Result | Result |
 |---|---|---|---|---|
@@ -30,6 +33,21 @@ The Inventory Manager was tested manually through the command-line interface. Th
 | 24 | Update persistence | Update an item's quantity, exit, and restart | Updated quantity remains saved | PASS |
 | 25 | Remove persistence | Remove an item, exit, and restart | Removed item does not return | PASS |
 
+## Automated Pytest Results
+
+The automated unit tests are written in `test_inventory_manager.py`.
+
+- Testing framework: pytest
+- Total automated tests: 32
+- Passed: 32
+- Failed: 0
+
+Command used:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -v
+```
+
 ## Final Inventory Used for Testing
 
 ```text
@@ -38,3 +56,4 @@ Printer Paper|Office Supplies|25
 Dry-Erase Markers|Classroom Supplies|4
 HDMI Cable|Electronics|6
 Notebook|Classroom Supplies|12
+```
